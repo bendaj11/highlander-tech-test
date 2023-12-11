@@ -182,7 +182,6 @@ dist
 
 # vuepress v2.x temp and cache directory
 .temp
-.cache
 
 # Docusaurus cache and generated files
 .docusaurus
@@ -218,7 +217,6 @@ app/**/*.js
 app/**/*.js.map
 
 # dependencies
-node_modules/
 bower_components/
 
 # IDEs and editors
