@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { LatLng } from '../../models';
-import { circle, point, pointOnSurface } from '@turf/turf';
+import {Injectable} from '@nestjs/common';
+import {LatLng} from '../../models';
+import {destination, point} from '@turf/turf';
 
 @Injectable()
 export class GoalService {
@@ -8,16 +8,16 @@ export class GoalService {
     originLatLng: LatLng,
     radius: number,
   ): LatLng {
-    const radiusCircle = circle(
-      point([originLatLng.lat, originLatLng.lng]),
-      radius,
-      64,
-      'meters',
-    );
+    const randomAngle = Math.random() * 2 * Math.PI;
+    const randomDistance = Math.random() * (radius / 1000);
 
-    const randomPointFeatureCollection = pointOnSurface(radiusCircle);
-    const randomPointCoordinates =
-      randomPointFeatureCollection.geometry.coordinates;
+    const dx = randomDistance * Math.cos(randomAngle);
+    const dy = randomDistance * Math.sin(randomAngle);
+
+    const newPoint = destination(point([originLatLng.lat, originLatLng.lng]), dx, dy);
+
+    const randomPointCoordinates = newPoint.geometry.coordinates
+
 
     return { lat: randomPointCoordinates[0], lng: randomPointCoordinates[1] };
   }

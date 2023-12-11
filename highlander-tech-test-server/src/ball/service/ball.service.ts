@@ -10,10 +10,9 @@ export class BallService {
     const goalTurfPoint = point([goalLocation.lat, goalLocation.lng]);
     const ballDistanceFromGoal = distance(
       ballTurfPoint,
-      goalTurfPoint,
-      'meters',
+      goalTurfPoint
     );
 
-    return ballDistanceFromGoal <= radius;
+    return ballDistanceFromGoal * 1000 <= radius;
   }
 }
